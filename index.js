@@ -1,10 +1,10 @@
 const express = require("express");
 const mongo = require('mongodb').MongoClient;
 const cookieParser = require("cookie-parser");
-const conString = "mongodb+srv://Kasper:1231234@cluster0-iczm6.mongodb.net/test?retryWrites=true&w=majority"
+const conString = "mongodb+srv://Kasper:1231234@cluster0-iczm6.mongodb.net/test?retryWrites=true&w=majority";
+const login = require("./Login/login");
+const auth = require("./Login/auth");
 
-
-app = express();
 skapaAnslutning()
 
 async function skapaAnslutning()
@@ -13,15 +13,17 @@ async function skapaAnslutning()
     const connect = await mongo.connect(conString,{ useNewUrlParser: true, useUnifiedTopology: true });
 
     //Skapar en veckosedel
-    const db = await connect.db("LOLWebb");
+    const db = await connect.db("webblol");
 
     //Lägger in maträtter i veckosedeln
     const collection = await db.collection("User_data");
 
+    app = express();
+
     //Kopplar upp oss
     app.use(cookieParser());
 
-    app.use("/Login",express.static(__dirname+"/Login"));
+    app.use("/login",express.static(__dirname+"/login"));
 
     //Parsa req.body
     app.use(express.urlencoded({extended:false}));

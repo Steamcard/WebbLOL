@@ -1,9 +1,8 @@
-//behöver dessa för att denna funktionen ska funka
-
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cookieParser = require("cookie-parser");
 const express = require("express");
+const secret = require("./secret");
 
 
 module.exports = function(req,res,next){
@@ -36,7 +35,7 @@ module.exports = function(req,res,next){
 
                 //cookies skickar data utan clienten märker ochså väldigt säkert då man kan ej ändra det.
                 res.cookie("token",token,{httpOnly:true,sameSite:"strict"});
-                res.redirect("/matratter");
+                res.redirect("/secret");
             }
             else
             {
