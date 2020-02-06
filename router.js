@@ -8,10 +8,7 @@ app.get("/",function(req,res){
     res.send(req.cookies);
 });
     
-app.post("/login", function(req,res)
-{
-    res.sendFile(__dirname+"/Login/loginForm.html");
-})
+app.post("/login", login)
 
 app.get("/login", function(req,res){
     res.sendFile(__dirname+"/Login/loginForm.html")

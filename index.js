@@ -5,6 +5,12 @@ const conString = "mongodb+srv://Kasper:1231234@cluster0-iczm6.mongodb.net/test?
 const login = require("./Login/login");
 const auth = require("./Login/auth");
 
+var RiotRequest = require('riot-lol-api');
+ 
+var riotRequest = new RiotRequest('RGAPI-0c3306b5-d7a1-4018-be75-52cd425cbdfc');
+const test = riotRequest.request('euw1', 'summoner', '/lol/summoner/v3/summoners/by-name/graphistos', function(err, data) {});
+
+console.log(riotRequest);
 skapaAnslutning()
 
 async function skapaAnslutning()
@@ -12,10 +18,10 @@ async function skapaAnslutning()
     //Kopplar in oss
     const connect = await mongo.connect(conString,{ useNewUrlParser: true, useUnifiedTopology: true });
 
-    //Skapar en veckosedel
+    //Skapar Webblol
     const db = await connect.db("webblol");
 
-    //Lägger in maträtter i veckosedeln
+    //Lägger in User_data i Webblol
     const collection = await db.collection("User_data");
 
     app = express();
@@ -23,7 +29,7 @@ async function skapaAnslutning()
     //Kopplar upp oss
     app.use(cookieParser());
 
-    app.use("/login",express.static(__dirname+"/login"));
+    app.use(express.static(__dirname+"/public"));
 
     //Parsa req.body
     app.use(express.urlencoded({extended:false}));
