@@ -5,12 +5,7 @@ const conString = "mongodb+srv://Kasper:1231234@cluster0-iczm6.mongodb.net/test?
 const login = require("./Login/login");
 const auth = require("./Login/auth");
 
-var RiotRequest = require('riot-lol-api');
- 
-var riotRequest = new RiotRequest('RGAPI-0c3306b5-d7a1-4018-be75-52cd425cbdfc');
-const test = riotRequest.request('euw1', 'summoner', '/lol/summoner/v3/summoners/by-name/graphistos', function(err, data) {});
 
-console.log(riotRequest);
 skapaAnslutning()
 
 async function skapaAnslutning()
