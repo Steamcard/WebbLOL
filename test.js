@@ -7,17 +7,17 @@ let options = {
 }
 
 request(options, (err,response, body)=>{
-    console.log(body.name);
+    console.log();
     
 })
 
 let top = {
-    url: 'https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/KIVgOiuLCgFCh85bIDODTztdP28dawk5CDOQEU4NlFQiIXk?api_key=RGAPI-3a60eb5a-bbbb-405b-a216-64d822241b75',
+    url: 'https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/KIVgOiuLCgFCh85bIDODTztdP28dawk5CDOQEU4NlFQiIXk?api_key=RGAPI-b233b4b8-ab72-41ad-89d5-ef5d681cfb11',
     json: true,
     method: "get"
 }
 
 request(top, (err,response, body)=>{
-    console.log();
+    console.log(body);
     
 })

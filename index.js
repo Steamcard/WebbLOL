@@ -4,7 +4,13 @@ const cookieParser = require("cookie-parser");
 const conString = "mongodb+srv://Kasper:1231234@cluster0-iczm6.mongodb.net/test?retryWrites=true&w=majority";
 const login = require("./Login/login");
 const auth = require("./Login/auth");
+const app = express();
+const path = require('path')
 
+var hbs  = require('express-handlebars');
+app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/' }));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 skapaAnslutning()
 
@@ -19,7 +25,7 @@ async function skapaAnslutning()
     //Lägger in User_data i Webblol
     const collection = await db.collection("User_data");
 
-    app = express();
+    
 
     //Kopplar upp oss
     app.use(cookieParser());
