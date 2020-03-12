@@ -12,13 +12,18 @@
 
         </div>
         <div id="Profile-stats">
-            <h1>{{name}}</h1>
-            <h2>{{user.summonerLevel}}</h2>
-            <h3>{{rank}}</h3>
+            <h1>{{user.name}}</h1>
+            {{#each matches}}
+                <h2>{{this.lane}}</h2>
+                <h3>{{this.champion}}</h3>
+            {{/each}}
+            <!--<h1>{{user.name}}</h1>
+            <h2>{{matches.matches.0.lane}}</h2>
+            <h3>{{matches.matches.0.champion}}</h3>-->
         </div>
         <div id="Profile-Game">
-            <h1>{{wins}}</h1>
-            <h1>{{matches}}</h1>
+            <h1>{{user.profileIconId}}</h1>
+            <h1>{{user.summonerLevel}}</h1>
         </div>
     </section>
     <section id="Matches">
