@@ -1,18 +1,8 @@
 const request = require('request');
 const apiKey = 'RGAPI-3a60eb5a-bbbb-405b-a216-64d822241b75';
-let options = {
-    url: 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/16FPS?api_key=RGAPI-3a60eb5a-bbbb-405b-a216-64d822241b75',
-    json: true,
-    method: "get"
-}
-
-request(options, (err,response, body)=>{
-    console.log();
-    
-})
 
 let top = {
-    url: 'https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/KIVgOiuLCgFCh85bIDODTztdP28dawk5CDOQEU4NlFQiIXk?api_key=RGAPI-b233b4b8-ab72-41ad-89d5-ef5d681cfb11',
+    url: 'https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/RGAPI-8d2b5651-0c47-431b-8874-da6c7112968b',
     json: true,
     method: "get"
 }

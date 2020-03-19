@@ -2,7 +2,9 @@ const mongoId = require('mongodb').ObjectID;
 const login = require("./Login/login")
 const auth = require("./Login/auth")
 const request = require('request');
-const apiKey = 'RGAPI-616d561e-c64e-4601-adec-5d5e9994c66d';
+
+//Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
+const apiKey = 'RGAPI-8d2b5651-0c47-431b-8874-da6c7112968b';
 
 
 module.exports = async function(app){
@@ -12,11 +14,14 @@ app.get("/",function(req,res){
     
 });
 
-//GEr dig stats om din lol gubbe
-app.get("/stats",function(req,res)
+//Ger dig stats om din lol gubbe
+app.post("/stats",function(req,res)
 {
+    let name = JSON.parse(JSON.stringify(req.body)).Summoner;
+    console.log(name);
+
     let SummonerInfo = {
-        url: `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/16FPS?api_key=${apiKey}`,
+        url: `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${apiKey}`,
         json: true,
         method: "get"
     }
@@ -30,8 +35,6 @@ app.get("/stats",function(req,res)
             method: "get"
         }
 
-        console.log(user);
-        console.log(Match);
             
             request(Match, (serr,ses, macther)=>{
 
@@ -41,11 +44,12 @@ app.get("/stats",function(req,res)
                     method: "get"
                 }
 
-                    request(entries, (error3,response3, entrieses)=>{
-                    console.log(entrieses);
 
-                //Tar de sisa arrayen på macthes så inte alla loggar (över 100st)//
+                    request(entries, (error3,response3, entrieses)=>{
+
+                //Tar de sisa arrayen på macthes så inte alla loggar (över 100st)
                 last = macther.matches.slice(0,4);
+                
                 
                 res.render('stats', {user: user, matches: last, entrieses:entrieses});
             });

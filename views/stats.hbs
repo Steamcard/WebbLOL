@@ -9,25 +9,25 @@
 <body>
     <section id="Profile">
         <div id="Profile-icon">
-
+            <h1>{{user.profileIconId}}</h1>
+        </div>
+        <div id="Profile-General">
+                    <h1>{{user.name}}</h1>
+                    <h1>Level: {{user.summonerLevel}}</h1>
+                    <h1>{{entrieses.0.tier}} {{entrieses.0.rank}}</h1>
         </div>
         <div id="Profile-stats">
-            <h1>{{user.name}}</h1>
-            {{#each matches}}
-                <h2>{{this.lane}}</h2>
-                <h3>{{this.champion}}</h3>
-            {{/each}}
-            <!--<h1>{{user.name}}</h1>
-            <h2>{{matches.matches.0.lane}}</h2>
-            <h3>{{matches.matches.0.champion}}</h3>-->
-        </div>
-        <div id="Profile-Game">
-            <h1>{{user.profileIconId}}</h1>
-            <h1>{{user.summonerLevel}}</h1>
+            <h1 id="lp">{{entrieses.0.leaguePoints}} LP</h1>
+            <h1 id="wins">{{entrieses.0.wins}} Wins</h1>
+            <h1 id="loss">{{entrieses.0.losses}} Loss</h1>
         </div>
     </section>
-    <section id="Matches">
 
+    <section id="Matches">
+            {{#each matches}}
+            <h2>{{this.lane}}</h2>
+            <h3>{{this.champion}}</h3>
+            {{/each}}
     </section>
 </body>
 </html>
