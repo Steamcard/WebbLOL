@@ -1,0 +1,49 @@
+body
+{
+    margin: auto;
+    padding: 0px;
+    width: 900px;
+    height: 1800px;
+    background:url(background/lolBack.jpg);
+    background-size: 100%;
+}
+
+.background
+{
+    /*hi*/
+}
+
+.bar
+{
+    height: 200px;
+    background: #242E49;
+    opacity: 0.9;
+}
+
+.LogoSection
+{
+    height: 400px;
+    background: url(background/leauge.jpg);
+    background-size: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.summonerID
+{
+    padding-top: 30px;
+    height: 400px;
+    background: #233048;
+    margin: auto;
+    text-align: center;
+    box-shadow: 0px 4px px black;
+
+}
+.summonerID h1
+{
+    font-size: 30px;
+    margin: 20px;
+}
+.summonerID form
+{
+    margin: auto;
+}

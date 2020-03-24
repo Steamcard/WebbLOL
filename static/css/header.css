@@ -1,0 +1,50 @@
+nav
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 20px;
+    background: #1E2D54;
+}
+/*gul sträck under header*/
+header
+{
+    border-bottom: 1px solid yellow;
+}
+
+/*FALKSKIN texten*/
+header h1
+{
+    margin: 0;
+    margin-top: -55px;
+    margin-left:60px;
+    font-family: poppinsbold;
+    font-size: 30px;
+}
+/*Tar bort prickarna i listen*/
+header ul
+{
+    list-style-type: none;
+}
+
+header ul li
+{
+    display: flex;
+    justify-content: space-around;
+    float: right;
+    margin-right: 40px;
+}
+/*Länkarna byts om till vit istället för ursprungs färg blå*/
+header ul li a
+{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+/*Vid hover blir texten 1.2 större på 0.5s*/
+header ul li a:hover
+{
+    transform: scale(1.2);
+    transition: 0.5s;
+}

@@ -4,13 +4,15 @@ const auth = require("./Login/auth")
 const request = require('request');
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
-const apiKey = 'RGAPI-8d2b5651-0c47-431b-8874-da6c7112968b';
+const apiKey = 'RGAPI-efcb7e6d-c44f-40a7-be0b-0696dd4f0226';
 
 
 module.exports = async function(app){
 
 app.get("/",function(req,res){
-        res.render('home');
+
+        res.render('home',{style:'<link rel="stylesheet" href="/css/home.css"> <link rel="stylesheet" href="/css/header.css">'});
+
     
 });
 
