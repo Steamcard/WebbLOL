@@ -6,6 +6,7 @@ const login = require("./Login/login");
 const auth = require("./Login/auth");
 const app = express();
 const path = require('path')
+const router = require("./router");
 
 var hbs  = require('express-handlebars');
 app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/' }));
@@ -25,10 +26,10 @@ async function skapaAnslutning()
     //Lägger in User_data i Webblol
     const collection = await db.collection("User_data");
 
-    
-
     //Kopplar upp oss
     app.use(cookieParser());
+
+    app.use(router);
 
     app.use(express.static(__dirname+"/static"));
 

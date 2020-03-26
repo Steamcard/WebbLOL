@@ -2,6 +2,7 @@ const mongoId = require('mongodb').ObjectID;
 const login = require("./Login/login")
 const auth = require("./Login/auth")
 const request = require('request');
+const crypted = require("/Login/password.crypt")
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
 const apiKey = 'RGAPI-fea142f5-aecd-42e9-a2d8-80ec842ab94c';
@@ -9,6 +10,7 @@ const apiKey = 'RGAPI-fea142f5-aecd-42e9-a2d8-80ec842ab94c';
 
 module.exports = async function(app){
 
+//home
 app.get("/",function(req,res){
 
         res.render('home',{style:'<link rel="stylesheet" href="/css/home.css"> <link rel="stylesheet" href="/css/header.css">'});
@@ -79,7 +81,8 @@ app.post("/stats",function(req,res)
                         for (const i in championList) {
                         //Stämmer 1 av Champion listans id överens med ett av id i last så läggs Champion namnets data från championList till arrayn för att sedan skicka in till stats
                         if (championList[i].key == id) {
-                            const arr = [championList[i].id];
+                            //kolla hur jag ska logga detta!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                            const arr = championList[i].id;
                             console.log(arr);
                         }
 
@@ -91,7 +94,7 @@ app.post("/stats",function(req,res)
                     });
 
                     //något sätt att få ut arryen? (arr)
-                    console.log(arr);
+                    //console.log(arr);
                     res.render('stats', {user: user, matches: last, entrieses:entrieses, style:'<link rel="stylesheet" href="/css/stats.css"> <link rel="stylesheet" href="/css/header.css">'});
             });
             
@@ -120,3 +123,25 @@ app.get("/secret",auth,function(req,res){
     res.send(req.cookies);
 });
 }
+
+router.get("/register", function(req,res){
+    res.sendFile(__dirname + "/registerForm.html");
+});
+
+router.post("/register", async function(req,res){
+
+    try{
+        let user = await crypted(req.body);
+        if(user){
+            let insert = await db.dbInserUser(user);
+            res.send("You have been registerd");
+        } 
+        else{
+            res.send("ERROR! No user have been created!")
+        }
+    }
+    catch(err)
+    {
+        res.send(err);
+    }
+});
