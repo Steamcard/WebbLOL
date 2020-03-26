@@ -1,33 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <section id="Profile">
-        <div id="Profile-icon">
-            <h1>{{user.profileIconId}}</h1>
+
+{{!--Komma åt iconerna med api requesterna till ddragon med sedan en output med bild till style --}}
+<style>
+    #icon
+    {
+        background:url("http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/{{user.profileIconId}}.png");
+    }
+
+</style>
+
+{{>header}}
+    <div class="bar">
+
+    </div>
+    <section class="Profile">
+        <div class="Profile-icon">
+            <div id="icon">
+                {{!-- <h1>{{user.profileIconId}}</h1> --}}
+            </div>
         </div>
-        <div id="Profile-General">
+        <div class="Profile-General">
                     <h1>{{user.name}}</h1>
                     <h1>Level: {{user.summonerLevel}}</h1>
                     <h1>{{entrieses.0.tier}} {{entrieses.0.rank}}</h1>
         </div>
-        <div id="Profile-stats">
-            <h1 id="lp">{{entrieses.0.leaguePoints}} LP</h1>
-            <h1 id="wins">{{entrieses.0.wins}} Wins</h1>
-            <h1 id="loss">{{entrieses.0.losses}} Loss</h1>
+        <div class="Profile-stats">
+            <h1 class="loss">{{entrieses.0.losses}} <span style="color:red">Loss</span> </h1>
+            <h2>|</h2>
+            <h1 class="wins">{{entrieses.0.wins}} <span style="color:green">Wins</span> </h1>
+            <h2>|</h2>
+            <h1 class="lp">{{entrieses.0.leaguePoints}} <span style="color:gold">LP</span> </h1>
         </div>
     </section>
 
-    <section id="Matches">
+    <section class="Matches">
             {{#each matches}}
             <h2>{{this.lane}}</h2>
-            <h3>{{this.champion}}</h3>
             {{/each}}
     </section>
-</body>
-</html>

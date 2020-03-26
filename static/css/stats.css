@@ -1,0 +1,65 @@
+body
+{
+    margin: auto;
+    padding: 0px;
+    width: 900px;
+    height: 1800px;
+    background:url(background/lolBack.jpg);
+    background-size: 100%;
+}
+
+.bar
+{
+    height: 300px;
+    background: grey;
+}
+
+.Profile
+{
+    height: 200px;
+    background: #283A6B;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+}
+
+.Profile-icon
+{
+    margin: auto;
+}
+
+#icon
+{
+    height: 128px;
+    width: 128px;
+    border: 1px solid black;
+}
+
+
+.Profile-General
+{
+    width: 300px;
+    border: 1px solid black;
+}
+
+.Profile-stats
+{
+    margin: auto;
+    border: 1px solid black;
+    float: right;
+    justify-content: space-around;
+}
+
+.Profile-stats h1
+{
+    float: right;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.Profile-stats h2
+{
+    float: right;
+    margin-right: 2px;
+    margin-left: 2px;
+}
