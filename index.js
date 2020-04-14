@@ -29,7 +29,7 @@ async function skapaAnslutning()
     //Kopplar upp oss
     app.use(cookieParser());
 
-    app.use(router);
+    
 
     app.use(express.static(__dirname+"/static"));
 
@@ -43,7 +43,6 @@ async function skapaAnslutning()
     app.User_data = collection;
     
     //Ladda in vår egen route-module och skicka in app som argument
-    require("./router")(app);
-
+    router(app);
     return collection;
 }

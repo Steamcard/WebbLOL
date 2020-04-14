@@ -5,6 +5,10 @@
     {
         background:url("http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/{{user.profileIconId}}.png");
     }
+    #vetej
+    {
+        background:url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{name}}_0.jpg");
+    }
 
 </style>
 
@@ -15,7 +19,6 @@
     <section class="Profile">
         <div class="Profile-icon">
             <div id="icon">
-                {{!-- <h1>{{user.profileIconId}}</h1> --}}
             </div>
         </div>
         <div class="Profile-General">
@@ -34,6 +37,20 @@
 
     <section class="Matches">
             {{#each matches}}
-            <h2>{{this.lane}}</h2>
+            <div class="Match">
+
+                <div class="Pitchure">
+                    <div class="crop">
+                        <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{{this.name}}_0.jpg" alt="ChampIcons" class="ChampIcon">
+                    </div>
+                </div>
+                
+
+                <div class="Lane-Name">
+                    <h2>{{this.name}}</h2>
+                    <h2>{{this.lane}}</h2>
+                </div>
+
+            </div>
             {{/each}}
     </section>

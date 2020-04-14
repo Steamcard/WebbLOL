@@ -8,7 +8,7 @@ module.exports = async function (body){
         user.password = await bcrypt.hash(user.password, salt);
         return user;
     }
-    catch{
+    catch(err){
         return false;
     }
 }

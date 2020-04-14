@@ -63,3 +63,54 @@ body
     margin-right: 2px;
     margin-left: 2px;
 }
+
+/*.crop
+{
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+}*/
+
+/*.ChampIcon
+{
+    width: 400px;
+    height: 300px;
+    margin: -20px 0 0 -230px;
+}*/
+.Match
+{
+    height: 200px;
+    background: #283A6B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Pitchure
+{
+    width: 200px;
+    margin: auto;
+}
+
+.crop
+{
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+}
+
+.ChampIcon
+{
+    width: 250px;
+    height: 150px;
+    margin: 0px 0 0 -125px;
+}
+
+.Lane-Name
+{
+    width: 500px;
+    margin: auto;
+
+    border: 1px solid black;
+}
