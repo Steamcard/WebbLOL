@@ -2,12 +2,12 @@ const mongoId = require('mongodb').ObjectID;
 const login = require("./Login/login")
 const auth = require("./Login/auth")
 const request = require('request');
-/*
-const crypted = require("/Login/password.crypt")
-*/
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
-const apiKey = 'RGAPI-3bc844c4-1bba-48c8-a124-0acc4af882c9';
+const apiKey = 'RGAPI-0f1ac6ad-29df-4511-ae98-2cc5b1b91cd1';
 
 
 module.exports = async function(app){
@@ -19,9 +19,28 @@ module.exports = async function(app){
 
     });
 
+    app.post("/login",login,function(req,res)
+    {
+        res.redirect("/secret");
+    });
+
+
+    app.get("/login",function(req,res){
+        res.render('login');
+    });
+
+    app.get("/secret",auth,function(req,res){
+        res.send(req.cookies);
+    });
+    
+    app.get("/logout", function(req,res){
+        res.cookie("token", "Du har loggat ut!");
+        res.redirect("/secret");
+    });
+
 
 //Ger dig stats om din lol gubbe
-    app.post("/stats",function(req,res){
+    app.post("/stats",auth,function(req,res){
 
         let name = req.body.Summoner;
         console.log(name);

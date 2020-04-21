@@ -33,7 +33,7 @@ console.log(user);
 
                 //cookies skickar data utan clienten märker ochså väldigt säkert då man kan ej ändra det.
                 res.cookie("token",token,{httpOnly:true,sameSite:"strict"});
-                res.redirect("/");
+                res.redirect("/secret");
             }
             else
             {

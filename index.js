@@ -13,9 +13,9 @@ app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __d
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-skapaAnslutning()
+startConnection()
 
-async function skapaAnslutning()
+async function startConnection()
 {
     //Kopplar in oss
     const connect = await mongo.connect(conString,{ useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,7 +24,7 @@ async function skapaAnslutning()
     const db = await connect.db("webblol");
 
     //Lägger in User_data i Webblol
-    const collection = await db.collection("User_data");
+    const collection = await db.collection("userdata");
 
     //Kopplar upp oss
     app.use(cookieParser());
@@ -40,7 +40,7 @@ async function skapaAnslutning()
     app.listen(4000, function(){console.log("Port: 4000")});
 
     //Lägger en koppling till vår kollektion till vårt app-obejekt
-    app.User_data = collection;
+    app.userdata = collection;
     
     //Ladda in vår egen route-module och skicka in app som argument
     router(app);
