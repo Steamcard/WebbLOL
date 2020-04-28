@@ -22,6 +22,7 @@ module.exports = function(req,res,next){
 
     }
     else{
-        res.send("Ingen Token tillgänlig");
+        res.redirect('/login');
+        
     }
 }

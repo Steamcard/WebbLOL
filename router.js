@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
-const apiKey = 'RGAPI-0f1ac6ad-29df-4511-ae98-2cc5b1b91cd1';
+const apiKey = 'RGAPI-6cb90139-0af2-49bf-ba86-690545a99608';
 
 
 module.exports = async function(app){

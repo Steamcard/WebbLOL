@@ -33,11 +33,12 @@ console.log(user);
 
                 //cookies skickar data utan clienten märker ochså väldigt säkert då man kan ej ändra det.
                 res.cookie("token",token,{httpOnly:true,sameSite:"strict"});
-                res.redirect("/secret");
+                res.redirect("/");
             }
             else
             {
-                res.send("Wrong User / Password");
+                res.redirect('/login');
+                
             }
 
         });
@@ -45,6 +46,7 @@ console.log(user);
     }
     else
     {
-        res.send("Wrong User / Password!");
+        res.redirect('/login');
+        
     }
 }
