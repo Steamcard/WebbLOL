@@ -7,12 +7,12 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
-const apiKey = 'RGAPI-6cb90139-0af2-49bf-ba86-690545a99608';
+const apiKey = 'RGAPI-39f8b603-7ded-4d37-ad31-4a4c72669b59';
 
 
 module.exports = async function(app){
 
-//home
+//Start sidan
     app.get("/",function(req,res){
 
             res.render('home',{style:'<link rel="stylesheet" href="/css/home.css"> <link rel="stylesheet" href="/css/header.css">'});
@@ -24,27 +24,29 @@ module.exports = async function(app){
         res.redirect("/secret");
     });
 
-
+//Inloggning
     app.get("/login",function(req,res){
         res.render('login');
     });
-
+//Kolla så sin hash är rätt
     app.get("/secret",auth,function(req,res){
         res.send(req.cookies);
     });
-    
+//utloggning
     app.get("/logout", function(req,res){
         res.cookie("token", "Du har loggat ut!");
         res.redirect("/secret");
     });
 
 
-//Ger dig stats om din lol gubbe
+//Stats hemisdan
     app.post("/stats",auth,function(req,res){
 
+        //Sparar inputen (namnet) man ger på startsidan 
         let name = req.body.Summoner;
         console.log(name);
 
+        //Hämtar ut information från Riot Games genom API och spelarens namn
         let SummonerInfo = {
             url: `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${apiKey}`,
             json: true,
@@ -53,7 +55,7 @@ module.exports = async function(app){
 
         
         request(SummonerInfo, (error,response, user)=>{
-
+            //Hämtar ut information från Riot Games genom API och spelarens namn
             let Match = {
                 url: `https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/${user.accountId}?api_key=${apiKey}`,
                 json: true,
@@ -62,7 +64,7 @@ module.exports = async function(app){
 
                 
                 request(Match, (serr,ses, macther)=>{
-
+                    //Hämtar ut information från Riot Games genom API och spelarens namn
                     let entries = {
                         url: `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${user.id}?api_key=${apiKey}`,
                         json: true,
@@ -71,22 +73,23 @@ module.exports = async function(app){
 
 
                         request(entries, async (error3,response3, entrieses)=>{
-
+                            //Hämtar ut information från Riot Games genom API och spelarens namn
                             let list = await getChampion();
                             
                             list = list.data;
 
 
 
-                    //Tar de sisa arrayen på macthes så inte alla loggar (över 100st)
+                    //Tar de sitsa arrayen på macthes så inte alla loggar (över 100st)
                     last = macther.matches.slice(0,4);
 
-
+                    //Mappar de matcherna som är över
                     last.map(element=>{
 
                         for(let i in list){
+                            //Kollar key id i txt filen och jä,för mellan id för de spelarna har spelat.
                             if(list[i].key == element.champion){
-
+                                //sätter in namnet i listan
                                 element.name = list[i].id;
                             }
 
@@ -94,13 +97,14 @@ module.exports = async function(app){
                     });
                     
                     console.log(last);
-                    
+                    //Renderar allt jag behöver i stats
                     res.render('stats', {user: user, matches: last, entrieses:entrieses,style:'<link rel="stylesheet" href="/css/stats.css"> <link rel="stylesheet" href="/css/header.css">'});
                 })})})
     });
 
 function getChampion(){
     let p = new Promise ((resolve, reject)=>{
+        //hämtar text filen från Riot Games
         request('http://ddragon.leagueoflegends.com/cdn/10.6.1/data/en_US/champion.json', function (error, response, body) {
 
             if(error) resolve({mes:"errror"});

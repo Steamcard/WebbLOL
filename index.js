@@ -8,13 +8,16 @@ const app = express();
 const path = require('path')
 const router = require("./router");
 
+//Detta för Handelbars ska funka
 var hbs  = require('express-handlebars');
 app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/' }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+//startar serven
 startConnection()
 
+//serven startas
 async function startConnection()
 {
     //Kopplar in oss
@@ -23,7 +26,7 @@ async function startConnection()
     //Skapar Webblol
     const db = await connect.db("webblol");
 
-    //Lägger in User_data i Webblol
+    //Lägger in userdata i Webblol
     const collection = await db.collection("userdata");
 
     //Kopplar upp oss
