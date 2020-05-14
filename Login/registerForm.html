@@ -7,14 +7,25 @@
     <title>logginform</title>
 </head>
 <body>
-    <form action="/register" method="POST">
+    <form id="reg" action="/register" method="POST">
     
         <input type="email" name="email" placeholder="Email here..">
-        <input type="password" name="password" placeholder="Password here..">
-        <input type="password" name="password" placeholder="Re-enter Password here..">
+        <input type="password" id="pw" name="password" placeholder="Password here..">
+        <input type="password" id="rp" placeholder="Re-enter Password here..">
         <input type="submit" value="Create Account">
         <h1>Already have a Account?<a href="/Login/loginForm.html"> Login Here</a></h1>
 
     </form>
+    <script>
+        document.getElementById("reg").addEventListener("submit",function(e){
+            e.preventDefault();
+            if(document.getElementById("pw").value == document.getElementById("rp").value){
+                document.getElementById("reg").submit();
+            }
+            else{
+                alert("Lössenordet måste matcha!");
+            }
+        })
+    </script>
 </body>
 </html>

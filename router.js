@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
-const apiKey = 'RGAPI-39f8b603-7ded-4d37-ad31-4a4c72669b59';
+const apiKey = 'RGAPI-d7513bbd-461f-4927-8021-60f5b881cc17';
 
 
 module.exports = async function(app){
@@ -19,10 +19,33 @@ module.exports = async function(app){
 
     });
 
-    app.post("/login",login,function(req,res)
+    function passUserData(req,res,next){
+        req.userdata = app.userdata;
+        next();
+    };
+
+    app.post("/login",passUserData,login,function(req,res)
     {
         res.redirect("/secret");
     });
+
+    app.post("/register", async function(req,res){
+
+        let user = await app.userdata.findOne({email:req.body.email});
+        console.log(user);
+        if(user)
+        {
+            return res.send("user finns");
+        }
+        let newUser = {...req.body};
+        newUser.password = await bcrypt.hash(newUser.password, 12);
+
+        await app.userdata.insertOne(newUser);
+        res.send("user")
+    })
+    app.get("/register",function (req,res){
+        res.sendFile(__dirname + "/Login/registerForm.html");
+    })
 
 //Inloggning
     app.get("/login",function(req,res){

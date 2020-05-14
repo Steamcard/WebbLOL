@@ -5,10 +5,12 @@ const express = require("express");
 const secret = require("./secret");
 
 
-module.exports = function(req,res,next){
+module.exports = async function(req,res,next){
 
     //Hämta våra användare från db/fil
-    const users = require("./users");
+    //const users = require("./users");
+
+    const users = await req.userdata.find().toArray();
 
     const user = users.filter(function(u){
 
@@ -37,6 +39,7 @@ console.log(user);
             }
             else
             {
+                //kommer tbx till login (skadisplaya ngt här)
                 res.redirect('/login');
                 
             }
@@ -46,6 +49,7 @@ console.log(user);
     }
     else
     {
+        //kommer tbx till login (skadisplaya ngt här)
         res.redirect('/login');
         
     }
