@@ -2,12 +2,11 @@ const mongoId = require('mongodb').ObjectID;
 const login = require("./Login/login")
 const auth = require("./Login/auth")
 const request = require('request');
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 //Hämtar APIKEY Från LOLAPI hemsidan | Måste hämtas ny varje 24 tim!
-const apiKey = 'RGAPI-d7513bbd-461f-4927-8021-60f5b881cc17';
+const apiKey = 'RGAPI-25264655-f14f-4d35-9b3c-83ef3a263b8e';
 
 
 module.exports = async function(app){
@@ -31,17 +30,16 @@ module.exports = async function(app){
 
     app.post("/register", async function(req,res){
 
-        let user = await app.userdata.findOne({email:req.body.email});
-        console.log(user);
-        if(user)
+        let user = await app.userdata.findOne({email:req.body.email}); //letar om det redans finns en samma mail
+        if(user) //om mailen hittades
         {
             return res.send("user finns");
         }
-        let newUser = {...req.body};
-        newUser.password = await bcrypt.hash(newUser.password, 12);
+        let newUser = {...req.body}; //annars så skapas en newUser
+        newUser.password = await bcrypt.hash(newUser.password, 12); //krypterar lössenordet
 
-        await app.userdata.insertOne(newUser);
-        res.send("user")
+        await app.userdata.insertOne(newUser); //lägger in newUser i userdata
+        res.redirect("/login") //skickas till login för att sedan logga in näär kontot är skapat
     })
     app.get("/register",function (req,res){
         res.sendFile(__dirname + "/Login/registerForm.html");
@@ -51,23 +49,14 @@ module.exports = async function(app){
     app.get("/login",function(req,res){
         res.render('login');
     });
-//Kolla så sin hash är rätt
-    app.get("/secret",auth,function(req,res){
-        res.send(req.cookies);
-    });
-//utloggning
-    app.get("/logout", function(req,res){
-        res.cookie("token", "Du har loggat ut!");
-        res.redirect("/secret");
-    });
+
 
 
 //Stats hemisdan
     app.post("/stats",auth,function(req,res){
 
         //Sparar inputen (namnet) man ger på startsidan 
-        let name = req.body.Summoner;
-        console.log(name);
+        let name = req.body.Summoner; //hämtar namnet från home
 
         //Hämtar ut information från Riot Games genom API och spelarens namn
         let SummonerInfo = {
@@ -97,7 +86,7 @@ module.exports = async function(app){
 
                         request(entries, async (error3,response3, entrieses)=>{
                             //Hämtar ut information från Riot Games genom API och spelarens namn
-                            let list = await getChampion();
+                            let list = await getChampion(); //säter textdokumentet med all information i en list
                             
                             list = list.data;
 
@@ -130,7 +119,7 @@ function getChampion(){
         //hämtar text filen från Riot Games
         request('http://ddragon.leagueoflegends.com/cdn/10.6.1/data/en_US/champion.json', function (error, response, body) {
 
-            if(error) resolve({mes:"errror"});
+            if(error) resolve({mes:"error"});
             else resolve(JSON.parse(body));
         }
 

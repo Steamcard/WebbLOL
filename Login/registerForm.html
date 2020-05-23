@@ -17,13 +17,13 @@
 
     </form>
     <script>
-        document.getElementById("reg").addEventListener("submit",function(e){
+        document.getElementById("reg").addEventListener("submit",function(e){ //Gör att formuläret skickas när man trycket på sumbit knappen.
             e.preventDefault();
-            if(document.getElementById("pw").value == document.getElementById("rp").value){
-                document.getElementById("reg").submit();
+            if(document.getElementById("pw").value == document.getElementById("rp").value){ //Kollar om första lössenordet är samma som andra lössenordet
+                document.getElementById("reg").submit(); //är det rätt så skapas kontot
             }
             else{
-                alert("Lössenordet måste matcha!");
+                alert("Lössenordet måste matcha!"); //vid fel så får man en alert att man skrivit fel lössenord
             }
         })
     </script>

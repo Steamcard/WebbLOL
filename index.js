@@ -9,10 +9,10 @@ const path = require('path')
 const router = require("./router");
 
 //Detta för Handelbars ska funka
-var hbs  = require('express-handlebars');
-app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/' }));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+var hbs  = require('express-handlebars'); //hämtar modulen
+app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/' })); //konfigurerar handelbarsen
+app.set('views', path.join(__dirname, 'views')); //ger att app ska använda handelbars
+app.set('view engine', 'hbs'); //ger att app ska använda handelbars
 
 //startar serven
 startConnection()

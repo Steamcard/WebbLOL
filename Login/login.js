@@ -26,7 +26,7 @@ console.log(user);
     if(user.length === 1)
     {
         //Kolla lösenord
-        bcrypt.compare(req.body.password, user[0].password,function(err,success){
+        bcrypt.compare(req.body.password, user[0].password,function(err,success){ //jämför de krypterade lössenorden.
 
             if(success)
             {

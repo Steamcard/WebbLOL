@@ -22,6 +22,7 @@ module.exports = function(req,res,next){
 
     }
     else{
+        alert("Fel lösenord eller mail!")
         res.redirect('/login');
         
     }
